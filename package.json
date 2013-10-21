@@ -1,0 +1,18 @@
+{
+  "name": "dlpslicer",
+  "version": "0.0.0",
+  "description": "3d printer interface for uv curable resin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Elijah Insua <tmpvar@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "split": "~0.2.10",
+    "skateboard": "~0.2.1",
+    "serialport": "~1.1.3",
+    "stl": "~0.1.1",
+    "optimist": "~0.6.0"
+  }
+}

@@ -1,0 +1,48 @@
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript" src="gl-matrix.js"></script>
+  <script type="text/javascript" src="skateboard.min.js"></script>
+  <style type="text/css">
+    body {
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas" width="600" height="600"></canvas>
+<script type="text/javascript" src="tree.js"></script>
+
+<script type="text/javascript">
+  skateboard(function(stream) {
+    window.stream = stream;
+    stream.on('data', function(d) {
+      var obj = JSON.parse(d);
+      var config = {};
+      if (obj.type === "tick") {
+        console.log('tick')
+        var out = {};
+        if (window.tick()) {
+          out.type = "ready";
+        } else {
+          out.type = "done";
+        }
+
+        stream.write(JSON.stringify(out) + '\n');
+      } else if (obj.type === "model") {
+        console.log(obj.value)
+
+        window.setup(obj.value, config);
+        console.log(obj.value);
+        stream.write(JSON.stringify({ type : "ready" }) + '\n');
+        console.log('wrote ready');
+      } else if (obj.type === 'config') {
+        config = obj.value;
+      }
+    })
+
+  });
+</script>
+
+</body>
+</html>
